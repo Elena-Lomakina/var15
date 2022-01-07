@@ -1,0 +1,71 @@
+/* .MSG */
+*{color:black}
+.msg {
+	width: 90%;
+	margin: auto;
+	padding: 1rem;
+	font-family: Helvetica;
+	text-align: justify;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.msg > .closed {
+	font-size: 1.6rem;
+	padding: 0;
+}
+.msg > .closed:hover { cursor: pointer;}
+
+.msg-error {
+	border: thin solid #ebccd1;
+	color: #a94442;
+	background-color: #f2dede;
+	border-radius: 5px;
+}
+
+.msg-ok {
+	border: thin solid #d6e9c6;
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-radius: 5px;
+}
+
+input:focus{outline:none;}
+
+input {
+	margin-top: 15px;
+	padding:5px;
+	width: 300px;
+	height:25px;
+	font-size: 16px;
+	padding: 6px 0 4px 10px;
+	border: 1px solid #cecece;
+	background: #F6F6f6;
+}
+
+.sigbut{
+	width:300px;
+	height:40px;
+	font-size: 16px;
+}
+
+.sig-container {
+	padding:10px;
+  display: grid;
+  grid-template-columns: 350px;
+  grid-template-rows: 50px 50px 50px 50px;
+  grid-template-areas: "sigtext" "siglogin" "sigpasswd" "sigsubm";
+	padding-bottom: 46%;
+	padding-top: 37%;
+}
+
+.sigtext { grid-area: sigtext; }
+
+.siglogin { grid-area: siglogin; }
+
+.sigpasswd { grid-area: sigpasswd; }
+
+.sigsubm { grid-area: sigsubm; }
+
+#sign-up{width: 390px}
