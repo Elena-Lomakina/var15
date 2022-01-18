@@ -313,3 +313,9 @@ font-family: sans-serif;
 .dv_main a:link, a:visited {
     color:  black;;
 }
+
+
+.picture{
+    height:500px;
+    width:500px;
+}

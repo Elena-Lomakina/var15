@@ -27,8 +27,9 @@
 				<li><a href="category.php?category=Кухонные">Кухонные</a></li>
 				<li><a href="category.php?category=Уборочные">Уборочные</a></li>
 				<li><a href="category.php?category=Для стирки">Для стирки</a></li>
-				<li><a href="category.php?category=Для мелкого ремонта">Для мелкого ремонта</a></li>
+				<li><a href="category.php?category=Дачные">Дачные</a></li>
 				<li><a href="contact.php">Контакты</a></li>
+                <li><a href="trash.php" id="trash_menu_txt"><?=$trash?></a></li>
 				<li><a href="include/logout.php">Выход</a></li>
 			</ul>
 			<?php break; ?>
@@ -38,7 +39,7 @@
                 <li><a href="category.php?category=Кухонные">Кухонные</a></li>
                 <li><a href="category.php?category=Уборочные">Уборочные</a></li>
                 <li><a href="category.php?category=Для стирки">Для стирки</a></li>
-                <li><a href="category.php?category=Для мелкого ремонта">Для мелкого ремонта</a></li>
+                <li><a href="category.php?category=Дачные">Дачные</a></li>
 				<li><a href="contact.php">Контакты</a></li>
 				<li><a class="" href="signup.php">Вход</a></li>
 				<li><a href="register.php">Регистрация</a></li>
