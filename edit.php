@@ -2,6 +2,11 @@
 require_once "include/session.php";
 require_once "include/mysqli.php";
 
+if(!empty($_SESSION["status"])) {
+    $user = $_SESSION["login"];
+} else header("Location: /");
+
+
 $id_prod = $_SESSION["id_prod"];
 
 if($_POST["editprod"])

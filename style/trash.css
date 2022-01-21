@@ -1,0 +1,94 @@
+/* TRASH */
+
+article {
+	min-width: 600px;
+	width: 100%;
+	max-width: 800px;
+	border: thin solid #333;
+	margin: 1rem auto;
+}
+
+.name {
+	font-family: Helvetica;
+	font-size: 1rem;
+	font-weight: 600;
+	padding: 0.5rem;
+}
+
+
+.msg {
+	width: 90%;
+	margin: auto;
+	padding: 1rem;
+	font-family: Helvetica;
+	text-align: justify;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.msg > .closed {
+	font-size: 1.6rem;
+	padding: 0;
+}
+.msg > .closed:hover { cursor: pointer;}
+
+.msg-error {
+	border: thin solid #ebccd1;
+	color: #a94442;
+	background-color: #f2dede;
+	border-radius: 5px;
+}
+
+
+.msg-ok {
+	border: thin solid #d6e9c6;
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-radius: 5px;
+}
+
+.description {
+	text-indent: .5rem;
+	text-align: justify;
+	padding: 0 1rem;
+}
+
+.price {
+	text-align: right;
+	font-weight: 600;
+	font-family: Helvetica;
+	padding: .5rem;
+	color: black;
+}
+
+.price:after {
+	content: "р."
+}
+
+.wrap {
+	display: flex;
+}
+
+.wrap figure {
+	margin: 0 .5rem;
+	width: 100px;
+	height: auto;
+}
+
+.wrap img {
+	max-width: 100%;
+	height: auto;
+}
+
+input.submit {
+	font-size: 2rem;
+	font-family: Helvetica;
+	font-weight: bold;
+	width: 100%;
+	padding: 1rem;
+}
+
+
+
+/* *TRASH */

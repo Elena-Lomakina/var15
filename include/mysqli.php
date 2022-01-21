@@ -169,3 +169,19 @@
 		mysqli_query($conn, $query);
 
 	}
+
+function order_ofert ($price, $login, $product, $status = "processed") {
+    global $conn;
+    $user_id = db_select("ord", "login = '$login'")[0]["id"];
+    $time = time();
+
+    $query = "INSERT INTO `ord` VALUES(NULL, '1', '1', '1', '1', '1')";
+
+    //var_dump($query);
+
+    if(mysqli_query($conn, $query) == true){
+        return 1;
+    } else{
+        return 0;
+    }
+}

@@ -5,6 +5,9 @@
     else{
         $status = "none";
     }
+    $status = $_SESSION["status"];
+    $lenTrash = count($_SESSION["trash"]);
+    $trash = $lenTrash != 0 ? "Корзина - $lenTrash товар" : "Корзина";
 ?>
 <header>
 	<ul class="ctrl-panel">
@@ -29,7 +32,7 @@
 				<li><a href="category.php?category=Для стирки">Для стирки</a></li>
 				<li><a href="category.php?category=Дачные">Дачные</a></li>
 				<li><a href="contact.php">Контакты</a></li>
-                <li><a href="trash.php" id="trash_menu_txt"><?=$trash?></a></li>
+                <li><a href="trash.php" id="trash_txt"><?=$trash?></a></li>
 				<li><a href="include/logout.php">Выход</a></li>
 			</ul>
 			<?php break; ?>
