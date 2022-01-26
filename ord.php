@@ -1,6 +1,7 @@
 <?php
 	require_once "include/mysqli.php";
     require_once "include/session.php";
+
 	if($_POST["delord"])
 	{
 		$id = $_POST["delord"];
@@ -23,12 +24,13 @@
 ?>
 <!DOCTYPE html>
 <head>
-	<title>Ресторан ШИРЕ ХАРИ</title>
+    <?php require_once "elements/head.php"; ?>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-	<button style="width:100px;" value="Назад" onclick="location.href='index.php'"/><= Назад</button>
+<?php require_once "elements/header.php"; ?>
+<center><h2>Просмотр заказов</h2>
 	<form id="main" style="font-size: 14pt" method="post">
 		<table>
 			<tr>
@@ -52,13 +54,13 @@
 						}else{
 							$st = "Просрочен";
 						}
-
+						$prod = json_decode($result['product'], true);
 						echo <<<_OUT
 							<tr>
 								<td>{$result['time']}</td>
 								<td>{$result['price']}</td>
 								<td>{$result['user_id']}</td>
-								<td>{$result['product']}</td>
+								<td>{$prod[0]['name']}</td>
 								<td>$st</td>
 								<td><button name="delord" value="{$result['id']}">Удалить</button></td>
 							</tr>
@@ -72,4 +74,8 @@ _OUT;
 			?>
 		</table>
 	</form>
+</center>
 </body>
+<footer>
+    <?php require_once "elements/footer.php"; ?>
+</footer>

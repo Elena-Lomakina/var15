@@ -6,6 +6,12 @@
         $user = $_SESSION["login"];
     } else header("Location: /");
 
+    //Очистка корзины
+    if(isset($_POST["clear"])) {
+        unset($_SESSION["trash"]);
+        unset($_SESSION["total_price"]);
+        header("Refresh: 2; url=trash.php");
+    }
 
 	if(isset($_POST["submit"])) {
 		
@@ -90,7 +96,7 @@ _OUT;
 							<p class="description">$decsription</p>
 							</div>
 							<a href="viewer.php?product=$id" class="btn">Посмотреть</a>
-							<footer class="price">$price</footer>
+							<footer class="price">$price руб.</footer>
 							
 						
 						</article>
@@ -101,7 +107,7 @@ _OUT;
 				}
 					echo <<<_OUT
 						<div class="total">
-							Итого: $total_price рублей
+							Итого: $total_price руб.
 						</div>
 _OUT;
 					$_SESSION["total_price"] = $total_price;
@@ -110,6 +116,7 @@ _OUT;
 			
 			<form method="POST" action="">
 				<input type="submit" class="submit" name="submit" value="Заказать">
+                <input type="submit" class="submit" name="clear" value="Очистить">
 			</form>
 			
 			<?php } else {?>

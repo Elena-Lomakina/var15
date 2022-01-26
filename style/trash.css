@@ -60,7 +60,7 @@ article {
 	font-family: Helvetica;
 	padding: .5rem;
 	color: black;
-}
+}аsubmit
 
 .price:after {
 	content: "р."
@@ -82,8 +82,7 @@ article {
 }
 
 input.submit {
-	font-size: 2rem;
-	font-family: Helvetica;
+	font-size: 1rem;
 	font-weight: bold;
 	width: 100%;
 	padding: 1rem;

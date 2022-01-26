@@ -75,11 +75,9 @@ _OUT;
 							</div>
 							<footer class="price">$price руб.</footer>
 							<a href="viewer.php?product=$id" class="btn">Посмотреть</a>
-
-							<button type="button" onclick="productInTrash($id)">Заказать</button>
-
-							<a class="tools" href="edit.php?product=$id"><img src="img/editor.png"></a>
-							<a class="tools" href="delete.php?product=$id"><img src="img/trash.png"></a>
+							<a onclick="productInTrash($id)">Заказать</a>                           
+							<a href="edit.php?product=$id">Редактировать</a>
+							<a href="delete.php?product=$id">Удалить</a>
 						</article>
 _OUT;
 						break;

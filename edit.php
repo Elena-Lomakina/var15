@@ -7,7 +7,7 @@ if(!empty($_SESSION["status"])) {
 } else header("Location: /");
 
 
-$id_prod = $_SESSION["id_prod"];
+$id_prod = $_GET["product"];
 
 if($_POST["editprod"])
 {
@@ -24,7 +24,7 @@ if($_POST["editprod"])
 
 		if (!empty($name) or !empty($description) or !empty($property) or !empty($price) or !empty($vender_id) or !empty($status))
 		{
-			edit_prod($id_prod, $name, $category, $description, $way_img, $property, $price, $vender_id, $status);
+			edit_product($id_prod, $name, $description, $way_img, $property, $price, $vender_id, $status);
 			//header("Refresh: 1; url=edit.php");
 		}
 		else
@@ -61,21 +61,21 @@ if($_POST["ex"])
 <!DOCTYPE html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style/style.css">
     <?php require_once "elements/head.php"; ?>
 </head>
 <body>
     <?php
     require_once "elements/header.php";
     ?>
-<button style="width:100px;" value="Назад" onclick="location.href='index.php'"/><= Назад</button>
+    <center><h2>Редактирование товара</h2></center>
 	<?php
-if($_FILES['file'] and !$_POST['editprod']){
-	$check = can_upload($_FILES['file']);
-	if($check === true){
-		$way = make_upload($_FILES['file']);
-		$_SESSION['img'] = $way;
-		//header("Refresh: 1; url=edit.php");
+        if($_FILES['file'] and !$_POST['editprod']){
+            $check = can_upload($_FILES['file']);
+            if($check === true){
+                $way = make_upload($_FILES['file'], $categiry_for_img);
+                $_SESSION['img'] = $way;
+                //header("Refresh: 1; url=edit.php");
 	}else{
 		echo <<<_OUT
 		<script>
@@ -86,11 +86,13 @@ _OUT;
 }
 	?>
 	<div id="main">
+        <center>
 <?php
 echo <<<_OUT
 	<form id="form_prod" method="post" enctype="multipart/form-data">
-		<div class="name_prod">
-			<p>Название: <input type="text" name="name" value="{$result['name']}" required></p>
+		<div>
+			<p>Название: </p>
+			<input type="text" name="name" value="{$result['name']}" required>
 		</div>
 _OUT;
 if($way != ""){
@@ -110,12 +112,11 @@ echo <<<_OUT
 		</div>
 		<div class="destr_prod">
 		<p>Категория:
-		<select name="category">
-			<option value="Burgers">Бургеры</option>
-			<option selected value="Sushi">Суши</option>
-			<option value="Healthy_eating">Здоровое питание</option>
-			<option value="Drinks">Напитки</option>
-			</select></p>
+        <select name="category">
+          <option value="Кухонные">Кухонные</option>
+          <option selected value="Уборочные">Уборочные</option>
+          <option value="Для стирки">Для стирки</option>
+          <option value="Дачные">Дачные</option></select></p>
 			<p>Описание: <input type="text" name="description" value="{$result['description']}" required></p>
 			<p>Свойства: <input type="text" name="property" value="{$result['property']}" required></p>
 			<p>Производитель:
@@ -150,7 +151,9 @@ _OUT;
 	</form>
 _OUT;
 		?>
+            <center>
 </div>
+
 </body>
 <footer>
     <?php require_once "elements/footer.php"; ?>

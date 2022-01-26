@@ -10,10 +10,10 @@
 			$password = htmlentities(mysqli_real_escape_string($conn, $_POST["password"]));
 			$repeatpassword = htmlentities(mysqli_real_escape_string($conn, $_POST["repeatpassword"]));
 			if (!empty($user))
-				if (!db_check_usr($user))
+				if (!db_check_user($user))
 					if (strcmp($password, $repeatpassword) === 0)
 						if(!empty($password) || !empty($repeatpassword)){
-							add_usr($user, $password);
+							add_user($user, $password);
 							header("Refresh: 2; url=index.php");
 						} else
 							$error = "Пароль не может быть пустым";

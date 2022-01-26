@@ -9,7 +9,7 @@
 			$passwd = htmlentities(mysqli_real_escape_string($conn,$_POST["password"]));
 
 			if (!empty($usr))
-				if (!db_login($usr, $passwd)) {
+				if (!db_check_login($usr, $passwd)) {
 						$ok = "Добро пожаловть!!";
 						$_SESSION["login"] = $usr;
 						$_SESSION["status"] = get_user_status($usr);

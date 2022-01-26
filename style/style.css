@@ -1,0 +1,83 @@
+html{
+	margin:0px;
+}
+button:focus{outline:0}
+
+body {
+	background-attachment: fixed;
+	font-family: Arial;
+	margin: 0px;
+}
+
+a {
+	font-color: white;
+}
+
+input {
+	font-size: 14pt;
+}
+
+button {
+	font-size: 14pt;
+	border: none;
+	text-align: center;
+	padding: 2px 5px;
+}
+
+select {
+	font-size: 14pt;
+}
+
+#submenu {
+	font-size: 20pt;
+	width: 100%;
+	height: auto;
+	background-color: black;
+	display: inline-flex;
+}
+#add_prod {
+	width: 185px;
+	margin: 0px
+}
+#main {
+	font-size: 20pt;
+	height: auto;
+	margin: 20px auto;
+	padding: 10px;
+}
+
+#form_prod {
+	width: 850px;
+	height: auto;
+	margin: 20px auto;
+	border: 1px solid white;
+	padding: 10px 0px;
+}
+
+
+.name_prod {
+	font-size: 30pt;
+	width: 800px;
+	height: auto;
+	object-fit: cover;
+	margin: 20px auto;
+	word-break: normal;
+}
+
+.img_prod {
+	width: 800px;
+	height: auto;
+	object-fit: cover;
+	margin: 20px auto;
+}
+.img_prod img{
+	max-width:100%;
+}
+.destr_prod {
+	font-size: 14pt;
+	width: 800px;
+	height: auto;
+	object-fit: cover;
+	margin: 20px auto;
+	word-break: normal;
+}
