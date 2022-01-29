@@ -13,6 +13,8 @@
 		{
 			del_ord($id);
 			db_close();
+            $ok = "Заказ успешно удален !";
+            header("Refresh: 2; url=trash.php");
 		}
 		else
 		{
@@ -34,6 +36,22 @@
 </head>
 <body>
 <?php require_once "elements/header.php"; ?>
+<?php
+if(isset($error))
+    echo <<<_OUT
+				<div id="msg-error" class="msg msg-error">
+					<div>$error</div>
+					<div class="closed" onclick="msgClose('msg-error')">&#10006;</div>
+				</div>
+_OUT;
+else if(isset($ok))
+    echo <<<_OUT
+				<div id="msg-ok" class="msg msg-ok">
+					<div>$ok</div>
+					<div class="closed" onclick="msgClose('msg-ok')">&#10006;</div>
+				</div>
+_OUT;
+?>
 <center><h2>Просмотр заказов</h2>
 	<form id="main" style="font-size: 14pt" method="post">
 		<table>

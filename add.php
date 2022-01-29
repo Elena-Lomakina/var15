@@ -38,13 +38,9 @@ $id_prod = $_SESSION["id_prod"];
 			if (!empty($name) or !empty($description) or !empty($property) or !empty($price) or !empty($status))
 			{
 				add_product($name, $category, $description, $way_img, $property, $price, $status);
+                header("Refresh: 2; url=add.php");
+                $ok = "Продукт успешно добавлен";
 				unset($_SESSION['img']);
-				echo <<<_OUT
-				<script>
-					alert("Запись добавлена");
-				</script>
-_OUT;
-
 			}
 			else
 			{
@@ -72,6 +68,22 @@ _OUT;
 </head>
 <body>
 <?php require_once "elements/header.php"; ?>
+<?php
+if(isset($error))
+    echo <<<_OUT
+				<div id="msg-error" class="msg msg-error">
+					<div>$error</div>
+					<div class="closed" onclick="msgClose('msg-error')">&#10006;</div>
+				</div>
+_OUT;
+else if(isset($ok))
+    echo <<<_OUT
+				<div id="msg-ok" class="msg msg-ok">
+					<div>$ok</div>
+					<div class="closed" onclick="msgClose('msg-ok')">&#10006;</div>
+				</div>
+_OUT;
+?>
 <center><h2>Добавление товара</h2></center>
 <?php
 	if($_FILES['file'] and !$_POST['editprod'] and !$_POST['addprod']){

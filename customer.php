@@ -21,6 +21,8 @@
 			if (!empty($name) or !empty($inn) or !empty($director) or !empty($tel) or !empty($legal_address) or !empty($actual_address) or !empty($status) or !empty($status_responsibility))
 			{
                 add_customer($name, $inn, $director, $tel, $legal_address, $actual_address, $status, $status_responsibility);
+                $ok = "Заказчик успешно добавлен !";
+                header("Refresh: 2; url=customer.php");
 			}
 			else
 			{
@@ -40,15 +42,13 @@
 		{
 			del_customer($id);
 			db_close();
+            $ok = "Заказчик успешно удален !";
+            header("Refresh: 2; url=customer.php");
 		}
 		else
 		{
 			$error = "Ошибка подключения!";
 		}
-	}
-
-	if($_POST["cancel"]) {
-		header("Refresh: 1; url=customer.php");
 	}
 
 	if($_POST["savecust"])
@@ -67,6 +67,7 @@
 			if (!empty($name2) or !empty($inn2) or !empty($director2) or !empty($tel2) or !empty($legal_address2) or !empty($actual_address2) or !empty($status2) or !empty($status_responsibility2))
 			{
                 edit_customer($id_cust, $name2, $inn2, $director2, $tel2, $legal_address2, $actual_address2, $status2, $status_responsibility2);
+                $ok = "Заказчик успешно обновлен !";
 			}
 			else
 			{
@@ -74,6 +75,7 @@
 			}
 			db_close();
 			header("Refresh: 1; url=customer.php");
+            header("Refresh: 2; url=customer.php");
 		}
 		else
 		{
@@ -95,6 +97,22 @@
 </head>
 <body>
     <?php 	require_once "elements/header.php"; ?>
+    <?php
+    if(isset($error))
+        echo <<<_OUT
+				<div id="msg-error" class="msg msg-error">
+					<div>$error</div>
+					<div class="closed" onclick="msgClose('msg-error')">&#10006;</div>
+				</div>
+_OUT;
+    else if(isset($ok))
+        echo <<<_OUT
+				<div id="msg-ok" class="msg msg-ok">
+					<div>$ok</div>
+					<div class="closed" onclick="msgClose('msg-ok')">&#10006;</div>
+				</div>
+_OUT;
+    ?>
     <center><h2>Добавление заказчика</h2></center>
 	<?php
 		if($_POST["editcust"]) {

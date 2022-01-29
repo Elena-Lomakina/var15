@@ -14,21 +14,27 @@ if($_POST["adduser"])
         $password = htmlentities(mysqli_real_escape_string($conn, $_POST["password"]));
         $repeatpassword = htmlentities(mysqli_real_escape_string($conn, $_POST["repeatpassword"]));
         $status = htmlentities(mysqli_real_escape_string($conn, $_POST["status"]));
-
-        if (!empty($user))
-            if (!db_check_user($user))
-                if (strcmp($password, $repeatpassword) === 0)
+        var_dump($user);
+        if (!empty($user)){
+            if (!db_check_user($user)){
+                if (strcmp($password, $repeatpassword) === 0){
                     if(!empty($password) || !empty($repeatpassword)){
                         add_user($user, $password, $status);
                         header("Refresh: 1; url=add_user.php");
                     } else
                         $error = "Пароль не может быть пустым";
-                else
+                }
+                else {
                     $error = "Пароли не совпадают";
-            else
+                }
+            }
+            else {
                 $error = "Пользователь с таким именем уже существует";
-        else
+            }
+        }
+        else {
             $error = "Логин не может быть пустым";
+        }
         db_close();
         $ok = "Вы зарегистрировались";
     }
@@ -160,7 +166,7 @@ _OUT;
     echo <<<_OUT
             <center>
                 <form id="main" method="post">
-                            <p>E-mile: <input type="text" name="name" value="" required></p>
+                            <p>E-mile: <input type="text" name="login" value="" required></p>
                             <p>Пароль: <input type="text" name="password" value="" required></p>
                             <p>Повторите пароль: <input type="text" name="repeatpassword" value="" required></p>                        
                             <p>Статус:

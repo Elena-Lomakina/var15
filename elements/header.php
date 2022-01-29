@@ -22,6 +22,7 @@
 			<?php case "user": ?>
 			<ul class="menu">
 				<li><a href="index.php">Главная</a></li>
+                <li><a href="search.php">Поиск</a></li>
 				<li><a href="category.php?category=Кухонные">Кухонные</a></li>
 				<li><a href="category.php?category=Уборочные">Уборочные</a></li>
 				<li><a href="category.php?category=Для стирки">Для стирки</a></li>

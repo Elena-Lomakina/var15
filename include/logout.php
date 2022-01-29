@@ -3,6 +3,6 @@
 	
 	session_unset();//уничтажаем данные сессии
 	session_destroy();
-	header("Location: /");//перенаправляем на стартовую страницу
+	header("Location: /signup.php");//перенаправляем на стартовую страницу
 	exit;
 ?>

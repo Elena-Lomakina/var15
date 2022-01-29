@@ -30,17 +30,18 @@
 		$password = hash("sha256", $password . $salt);
 
 		$query = "INSERT INTO login VALUES(NULL, '$login', '$password', '$salt', '$status')";
+		//var_dump($query);
 		mysqli_query($conn, $query);
 	}
     //Добавление продукта
-	function add_product($name, $category, $description, $img, $property, $price, $customer_id, $status) {
+	function add_product($name, $category, $description, $img, $property, $price, $status) {
 		global $conn;
-		$query = "INSERT INTO product VALUES(NULL, '$category', '$name', '$description', '$img', '$property', $price, '$status', $customer_id)";
+		$query = "INSERT INTO product VALUES(NULL, '$category', '$name', '$description', '$img', '$property', $price, '$status')";
 		//var_dump($query);
 		mysqli_query($conn, $query);
 	}
     //Редактирование продукта
-    function edit_product($id, $name, $description, $way, $property, $price, $customer_id, $status) {
+    function edit_product($id, $name, $description, $way, $property, $price, $status) {
         global $conn;
         $query = "UPDATE product SET name='$name', description='$description', img='$way', property='$property', price=$price, status='$status' WHERE id = $id";
         mysqli_query($conn, $query);
@@ -209,9 +210,8 @@
     function order_ofert ($price, $login, $product) {
         global $conn;
         $user_id = db_select("login", "login = '$login'")[0]["id"];
-        $time = time();
-
-        $query = "INSERT INTO `ord` VALUES(NULL, $time, $price, $user_id, '$product', 'processed')";
+        $time = date("Y-m-d H:i:s");
+        $query = "INSERT INTO `ord` VALUES(NULL, '$time', $price, $user_id, '$product', 'processed')";
 
         //var_dump($query);
 
@@ -250,3 +250,4 @@
         copy($file['tmp_name'], $way);
         return $way;
     }
+

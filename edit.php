@@ -24,11 +24,13 @@ if($_POST["editprod"])
 		if (!empty($name) or !empty($description) or !empty($price) or !empty($status))
 		{
 			edit_product($id_prod, $name, $description, $way_img, $property, $price, $status);
-			//header("Refresh: 1; url=edit.php");
+			header("Refresh: 1; url=edit.php");
+            unset($_SESSION['img']);
 		}
 		else
 		{
 			$error = "Все поля должны быть заполнены!";
+            unset($_SESSION['img']);
 		}
 		db_close();
 	}
