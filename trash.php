@@ -4,7 +4,7 @@
 
     if(!empty($_SESSION["status"])) {
         $user = $_SESSION["login"];
-    } else header("Location: /");
+    } else header("Location: /signup.php");
 
     //Очистка корзины
     if(isset($_POST["clear"])) {
@@ -126,5 +126,7 @@ _OUT;
 	
 
 </body>
-
+<footer>
+    <?php require_once "elements/footer.php"; ?>
+</footer>
 </html>

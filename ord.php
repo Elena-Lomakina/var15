@@ -2,6 +2,10 @@
 	require_once "include/mysqli.php";
     require_once "include/session.php";
 
+    if(!empty($_SESSION["status"])) {
+        $user = $_SESSION["login"];
+    } else header("Location: /signup.php");
+
 	if($_POST["delord"])
 	{
 		$id = $_POST["delord"];

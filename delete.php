@@ -1,8 +1,7 @@
 <?php
     if(!empty($_SESSION["status"])) {
         $user = $_SESSION["login"];
-    }
-    else header("Location: /");
+    } else header("Location: /signup.php");
 	require_once "include/session.php";
 	require_once "include/mysqli.php";
 	db_connect();

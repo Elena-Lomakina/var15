@@ -2,6 +2,10 @@
 	require_once "include/session.php";
 	require_once "include/mysqli.php";
 
+    if(!empty($_SESSION["status"])) {
+        $user = $_SESSION["login"];
+    } else header("Location: /signup.php");
+
 	if(!empty($_GET["product"])) {
 		$product = $_GET["product"];
 

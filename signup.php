@@ -1,7 +1,11 @@
 <?php
-	require_once "include/session.php";
+    require_once "include/session.php";
 	require_once "include/mysqli.php";
-	$status = "admin";
+
+    if(!empty($_SESSION["status"])) {
+        header("Location: /");
+    }
+
 	if(!empty($_POST))
 		if( !db_connect() ) {
 
@@ -13,8 +17,7 @@
 						$ok = "Добро пожаловть!!";
 						$_SESSION["login"] = $usr;
 						$_SESSION["status"] = get_user_status($usr);
-						header("Refresh: 2; url=index.php");
-
+						header("Refresh: 1; url=/index.php");
 				} else {
 					$error = "Не правильный логин или пароль";
 				}

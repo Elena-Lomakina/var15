@@ -12,7 +12,8 @@
 					<li><h3 id="admp" class="wg_t_s_1">Админ. панель</h3>
 						<ul class="submenu">
 							<li><h3 class="wg_t"><a id="3" href="add.php">Добавление товара</a></h3></li>
-                            <li><h3 class="wg_t"><a id="3" href="vender.php">Добавление поставщика</a></h3></li>
+                            <li><h3 class="wg_t"><a id="3" href="customer.php">Добавление заказчика</a></h3></li>
+                            <li><h3 class="wg_t"><a id="3" href="add_user.php">Добавление пользователя</a></h3></li>
                             <li><h3 class="wg_t"><a id="3" href="ord.php">Заказы</a></h3></li>
 						</ul>
 					</li>

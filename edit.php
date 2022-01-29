@@ -4,7 +4,7 @@ require_once "include/mysqli.php";
 
 if(!empty($_SESSION["status"])) {
     $user = $_SESSION["login"];
-} else header("Location: /");
+} else header("Location: /signup.php");
 
 
 $id_prod = $_GET["product"];
@@ -18,13 +18,12 @@ if($_POST["editprod"])
 		$way_img = $_SESSION['img'];
 		$property = htmlentities(mysqli_real_escape_string($conn, $_POST["property"]));
 		$price = htmlentities(mysqli_real_escape_string($conn, $_POST["price"]));
-		$vender_id = htmlentities(mysqli_real_escape_string($conn, $_POST["vender_id"]));
 		$status = htmlentities(mysqli_real_escape_string($conn, $_POST["status"]));
 		$category = htmlentities(mysqli_real_escape_string($conn, $_POST["category"]));
 
-		if (!empty($name) or !empty($description) or !empty($property) or !empty($price) or !empty($vender_id) or !empty($status))
+		if (!empty($name) or !empty($description) or !empty($price) or !empty($status))
 		{
-			edit_product($id_prod, $name, $description, $way_img, $property, $price, $vender_id, $status);
+			edit_product($id_prod, $name, $description, $way_img, $property, $price, $status);
 			//header("Refresh: 1; url=edit.php");
 		}
 		else
@@ -41,9 +40,11 @@ if($_POST["editprod"])
 
 if(!db_connect())
 {
-	$query = "SELECT category, name, description, img, property, price, vender_id, status FROM product WHERE id = '$id_prod'";
+	$query = "SELECT category, name, description, img, property, price, status FROM product WHERE id = '$id_prod'";
+
 	$res2 = mysqli_query($conn, $query);
 	$result = mysqli_fetch_array($res2);
+    $_SESSION['img'] = $result['img'];
 	$categiry_for_img = $result['category'];
 }
 else
@@ -117,26 +118,8 @@ echo <<<_OUT
           <option selected value="Уборочные">Уборочные</option>
           <option value="Для стирки">Для стирки</option>
           <option value="Дачные">Дачные</option></select></p>
-			<p>Описание: <input type="text" name="description" value="{$result['description']}" required></p>
-			<p>Свойства: <input type="text" name="property" value="{$result['property']}" required></p>
-			<p>Производитель:
-			<select name="vender_id">
-_OUT;
-if(!db_connect())
-{
-	$query = "SELECT * FROM vender";
-	$res2 = mysqli_query($conn, $query);
-
-	while ($result2 = mysqli_fetch_array($res2)) {
-
-		echo <<<_OUT
-			<option value="{$result2['id']}">{$result2['name']}</option>
-_OUT;
-	}
-}
-			echo <<<_OUT
-		    </select>
-			</p>
+			<p>Описание: <input type="text" name="description" value="{$result['description']}"></p>
+			<p>Свойства: <input type="text" name="property" value="{$result['property']}"></p>		
 			<p>Статус:
 			<select name="status">
 				<option value="empty">Нет в наличии</option>

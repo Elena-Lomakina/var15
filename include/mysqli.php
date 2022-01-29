@@ -29,48 +29,63 @@
 		$salt = salt_gen();
 		$password = hash("sha256", $password . $salt);
 
-		$query = "INSERT INTO user VALUES(NULL, '$login', '$password', '$salt', '$status')";
+		$query = "INSERT INTO login VALUES(NULL, '$login', '$password', '$salt', '$status')";
 		mysqli_query($conn, $query);
 	}
     //Добавление продукта
-	function add_product($category, $name, $description, $img, $property, $price, $status, $vender_id) {
+	function add_product($name, $category, $description, $img, $property, $price, $customer_id, $status) {
 		global $conn;
-		$query = "INSERT INTO product VALUES(NULL, '$category', '$name', '$description', '$img', '$property', $price, '$status', $vender_id)";
+		$query = "INSERT INTO product VALUES(NULL, '$category', '$name', '$description', '$img', '$property', $price, '$status', $customer_id)";
 		//var_dump($query);
 		mysqli_query($conn, $query);
 	}
     //Редактирование продукта
-    function edit_product($id, $name, $description, $way, $property, $price, $vender_id, $status) {
+    function edit_product($id, $name, $description, $way, $property, $price, $customer_id, $status) {
         global $conn;
-        $query = "UPDATE product SET name='$name', description='$description', img='$way', property='$property', price=$price, vender_id='$vender_id', status='$status' WHERE id = $id";
+        $query = "UPDATE product SET name='$name', description='$description', img='$way', property='$property', price=$price, status='$status' WHERE id = $id";
+        mysqli_query($conn, $query);
+
+    }
+    //Редактирование продукта
+    function edit_user($id, $login, $password, $status) {
+        global $conn;
+        $query = "UPDATE login SET login='$login', password='$password', status='$status' WHERE id = $id";
+        //var_dump($query);
         mysqli_query($conn, $query);
 
     }
     //Добавление вендера
-    function add_vender($name, $inn, $dir, $phone, $ur_adr, $fiz_adr, $status) {
+    function add_customer($name, $inn, $dir, $phone, $ur_adr, $fiz_adr, $status, $status2) {
         global $conn;
-        $query = "INSERT INTO vender VALUES(NULL, '$name', '$inn', '$dir', '$phone', '$ur_adr', '$fiz_adr', $status)";
+        $query = "INSERT INTO customer VALUES(NULL, '$name', '$inn', '$dir', '$phone', '$ur_adr', '$fiz_adr', $status, $status2)";
         //var_dump($query);
         mysqli_query($conn, $query);
     }
     //Редактирование вендреа
-    function edit_vender($id_ven, $name, $inn, $dir, $phone, $ur_adr, $fiz_adr, $status) {
+    function edit_customer($id_customer, $name, $inn, $dir, $phone, $ur_adr, $fiz_adr, $status, $status2) {
         global $conn;
-        $query = "UPDATE vender SET name='$name', inn='$inn', director='$dir', tel='$phone', legal_address='$ur_adr', actual_address='$fiz_adr', status=$status WHERE id = $id_ven";
+        $query = "UPDATE customer SET name='$name', inn='$inn', director='$dir', tel='$phone', legal_address='$ur_adr', actual_address='$fiz_adr', status=$status, responsibility= $status2 WHERE id = $id_customer";
         //var_dump($query);
         mysqli_query($conn, $query);
     }
     //Удаление вендера
-    function del_vender($id_ven) {
+    function del_customer($id_customer) {
         global $conn;
-        $query = "DELETE FROM vender WHERE id = $id_ven";
+        $query = "DELETE FROM customer WHERE id = $id_customer";
+        mysqli_query($conn, $query);
+    }
+
+    //Удаление вендера
+    function del_user($id_user) {
+        global $conn;
+        $query = "DELETE FROM login WHERE id = $id_user";
         mysqli_query($conn, $query);
     }
 
 	// проверка пары логин/пароль
 	function db_check_login($login, $password) {
 		global $conn;
-		$query = "SELECT * FROM user WHERE login = '$login'";
+		$query = "SELECT * FROM login WHERE login = '$login'";
 
 		$result = mysqli_query($conn, $query);
 		if( mysqli_num_rows($result) != 0 ) {
@@ -93,12 +108,21 @@
 	//проверка на существование пользователя
 	function db_check_user($login) {
 		global $conn;
-		$query = "SELECT * FROM user WHERE login = '$login'";
+		$query = "SELECT * FROM login WHERE login = '$login'";
 
 		$result = mysqli_query($conn, $query);
 
 		return mysqli_num_rows($result) != 0; // смотрим на количество строк результирующего запроса
 	}
+    //проверка на существование пользователя
+    function db_check_user_info($id) {
+        global $conn;
+        $query = "SELECT * FROM login WHERE id = '$id'";
+
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_fetch_assoc($result); // смотрим на количество строк результирующего запроса
+    }
 	//уникальная соль
 	function salt_gen() {
 		return md5(uniqid() . time . mt_rand());
@@ -139,7 +163,7 @@
     //статус пользователя
 	function get_user_status($login) {
 		global $conn;
-		$query = "SELECT status FROM user WHERE login = '$login'";
+		$query = "SELECT status FROM login WHERE login = '$login'";
 
 		//var_dump($query);
 
@@ -148,18 +172,18 @@
 		return mysqli_fetch_array($result)["status"];
 	}
     //обновление продукта
-	function db_update_product($id, $category, $name, $description, $img, $property, $price, $vender_id, $status) {
+	function db_update_product($id, $category, $name, $description, $img, $property, $price, $status) {
 		global $conn;
-		$query = "UPDATE product SET category='$category', name='$name', description='$description', img='$img', property='$property', price='$price', vender_id='$vender_id', status='$status' WHERE id=$id";
+		$query = "UPDATE product SET category='$category', name='$name', description='$description', img='$img', property='$property', price='$price', status='$status' WHERE id=$id";
 
 		//var_dump($query);
 
 		mysqli_query($conn, $query);
 	}
 	//обновление продукта тест
-	function db_update_product1($id, $category, $name, $description, $property, $price, $vender_id, $status) {
+	function db_update_product1($id, $category, $name, $description, $property, $price, $status) {
 		global $conn;
-		$query = "UPDATE product SET category='$category', name='$name', description='$description', property='$property', price='$price', vender_id='$vender_id', status='$status' WHERE id=$id";
+		$query = "UPDATE product SET category='$category', name='$name', description='$description', property='$property', price='$price', status='$status' WHERE id=$id";
 
 		//var_dump($query);
 
@@ -173,12 +197,18 @@
 		//var_dump($query);
 
 		mysqli_query($conn, $query);
-
 	}
+    //удаление продукта
+    function del_ord($id) {
+        global $conn;
+        $query = "DELETE FROM ord WHERE id=$id";
+        //var_dump($query);
+        mysqli_query($conn, $query);
+    }
     //Оформление заказа
     function order_ofert ($price, $login, $product) {
         global $conn;
-        $user_id = db_select("user", "login = '$login'")[0]["id"];
+        $user_id = db_select("login", "login = '$login'")[0]["id"];
         $time = time();
 
         $query = "INSERT INTO `ord` VALUES(NULL, $time, $price, $user_id, '$product', 'processed')";
